@@ -1,15 +1,6 @@
 require 'optparse'
 require 'open-uri'
 
-REPO_URL = "https://raw.github.com/farleyknight/rails_templates/master"
-
-FILES = {
-  controller:  "devise_facebook/omniauth_controller.rb",
-  initializer: "devise_facebook/initializer.rb",
-  config:      "devise_facebook/facebook.yml",
-  user:        "devise_facebook/user.rb"
-}
-
 options = {
   app_id:     "my_app_id",
   app_secret: "my_app_secret"
@@ -30,8 +21,18 @@ OptionParser.new do |opts|
 end.parse!
 
 
+REPO_URL = "https://raw.github.com/farleyknight/rails_templates/master"
+
+FILES = {
+  controller:  "devise_facebook/omniauth_controller.rb",
+  initializer: "devise_facebook/initializer.rb",
+  config:      "devise_facebook/facebook.yml",
+  user:        "devise_facebook/user.rb"
+}
+
+
 def using_remote_recipe?
-  ARGV.any? {|i| i =~ /http/ }
+  options[:script] =~ /http/
 end
 
 def open_file(file_id)

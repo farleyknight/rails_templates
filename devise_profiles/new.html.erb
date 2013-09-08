@@ -1,0 +1,46 @@
+<div id="user_registration">
+  <h1>Sign up</h1>
+
+  <%= form_for(@user, url: new_user_registration_path) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div>
+      <%= f.label :email %><br/>
+      <%= f.text_field :email, :autofocus => true %>
+    </div>
+
+    <div>
+      <%= f.label :password %><br/>
+      <%= f.password_field :password %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation %><br/>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <%= f.fields_for :profile do |p| %>
+      <h2>Profile</h2>
+
+      <div>
+        <%= p.label :first_name %><br/>
+        <%= p.text_field :first_name %>
+      </div>
+
+      <div>
+        <%= p.label :label_name %><br/>
+        <%= p.text_field :last_name %>
+      </div>
+
+      <div>
+        <%= p.label :location %><br/>
+        <%= p.text_field :location %>
+      </div>
+    <% end %>
+
+    <p><%= f.submit "Sign up" %></p>
+
+    <%= render partial: "devise/shared/links" %>
+  <% end %>
+</div>
+
